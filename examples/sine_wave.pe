@@ -1,0 +1,26 @@
+# sine_wave.pe
+# Draws one full sine wave across the canvas.
+#
+# How it works:
+#   angle steps from 0 to 360 degrees (one full cycle)
+#   sine of angle returns a value between -1 and +1
+#   multiplying by 80 scales that to -80 to +80 pixels
+#   adding 100 shifts the centre to y=100 on the canvas
+#   x steps 3 pixels right each iteration to spread the wave horizontally
+#
+# The y axis on a canvas is flipped — 0 is at the top, 600 at the bottom.
+# That is why the wave curves downward in the middle of the screen.
+#
+# Try changing:
+#   80 to 200 for a taller wave
+#   angle + 2 to angle + 4 for fewer, wider cycles
+#   "skyblue" to "coral" for a warmer colour
+
+let angle be 0
+let x be 0
+
+while angle is less than 360:
+    let y be 100 + 80 times sine of angle
+    draw circle at x, y with size 3 with color "skyblue"
+    let angle be angle + 2
+    let x be x + 3

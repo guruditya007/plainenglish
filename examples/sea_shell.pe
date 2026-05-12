@@ -1,0 +1,24 @@
+# sea_shell.pe
+# Draws a logarithmic spiral — the same shape as a nautilus shell.
+#
+# How it works:
+#   angle steps from 0 to 1260 degrees (3.5 full rotations)
+#   scale grows slightly each step, pushing points further from centre
+#   cosine of angle gives the x direction
+#   sine of angle gives the y direction
+#   together they trace a spiral outward from the centre
+#
+# Try changing:
+#   "coral" to "gold" or "skyblue"
+#   0.18 to 0.1 (tighter) or 0.3 (looser)
+#   size 2 to size 4 (thicker dots)
+
+let angle be 0
+let scale be 1
+
+while angle is less than 1260:
+    let x be 300 + scale times cosine of angle
+    let y be 300 + scale times sine of angle
+    draw circle at x, y with size 2 with color "coral"
+    let angle be angle + 6
+    let scale be scale + 0.18

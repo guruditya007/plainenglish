@@ -1,0 +1,15 @@
+# while_loop.pe
+# Demonstrates the while loop.
+# Keeps doubling a number until it exceeds 100.
+#
+# Expected output:
+#   1 → 2 → 4 → 8 → 16 → 32 → 64 → 128
+# The loop stops when number exceeds 100.
+# Final value printed is 128.
+
+let number be 1
+
+while number is at most 100:
+    let number be number times 2
+
+say "Final value: " + number

@@ -1,0 +1,20 @@
+# grade_checker.pe
+# Assigns a letter grade based on a numeric score.
+# Change the value of "score" to test different outcomes.
+#
+# Expected results:
+#   90 or above  → Grade: A
+#   70 to 89     → Grade: B
+#   50 to 69     → Grade: C
+#   below 50     → Grade: Fail
+
+let score be 72
+
+if score is at least 90:
+    say "Grade: A"
+otherwise if score is at least 70:
+    say "Grade: B"
+otherwise if score is at least 50:
+    say "Grade: C"
+otherwise:
+    say "Grade: Fail"

@@ -1,0 +1,19 @@
+# fibonacci.pe
+# Prints the first 20 numbers in the Fibonacci sequence.
+#
+# The sequence starts at 0 and 1.
+# Each number is the sum of the two before it:
+# 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 ...
+#
+# The variable "temp" is used to save the old value of b
+# before it gets overwritten. Without it, the calculation
+# would lose the number it needs for the next step.
+
+let a be 0
+let b be 1
+
+repeat 20 times:
+    say a
+    let temp be b
+    let b be a + b
+    let a be temp

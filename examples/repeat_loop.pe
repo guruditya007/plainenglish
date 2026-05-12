@@ -1,0 +1,9 @@
+# repeat_loop.pe
+# Demonstrates the repeat loop and a running counter.
+# Counts from 1 to 5 and prints each step.
+
+let count be 0
+
+repeat 5 times:
+    let count be count + 1
+    say "Step " + count
