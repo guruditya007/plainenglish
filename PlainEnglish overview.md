@@ -2,16 +2,14 @@
 
 > A natural language programming language — overview
 
-**Guruditya Sinha · v0.3 · 2026**
-
+**Guruditya Sinha** 
+**v0.3**
+**2026**
 ---
-
 ## What it is
-
 PlainEnglish is a working interpreted programming language whose syntax is written in plain English sentences. It is not an AI tool or a wrapper. It has its own lexer, parser, and interpreter — hand-built from scratch.
 
 The target user is someone who reads and writes English at a professional level but has no formal programming background. The syntax requires no prior knowledge of any programming language.
-
 ---
 
 ## What it looks like
