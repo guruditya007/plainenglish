@@ -21,6 +21,58 @@ Each entry:
 
 ---
 
+### BUG-007 · Boolean comparison with nothing failed
+
+- **Date:** 2026-05-13
+- **Status:** Fixed during implementation
+- **Symptom:** `if empty of scores is false` needed boolean comparison to work correctly
+- **Cause:** `empty of` returns a JavaScript boolean. The condition evaluator uses `===` so `false === false` works correctly without any special handling.
+- **Fix:** No code change needed — existing evalCond handled it correctly.
+
+---
+
+### BUG-006 · `a list` caused parser error
+
+- **Date:** 2026-05-13
+- **Status:** Fixed by syntax change
+- **Symptom:** `let scores be a list` caused `Error: Unexpected token: LIST ("list")`
+- **Cause:** The lexer read `a` as an `IDENT` token before reaching `LIST`. The parser consumed `a` as a variable name and then found `LIST` in an unexpected position.
+- **Two possible fixes:**
+  - Add `A` as a keyword token and teach `parsePrimary` to expect `a list` as a two-token sequence
+  - Remove `a` from the syntax entirely
+- **Resolution:** Syntax simplified to `let scores be list` without the article. Cleaner and unambiguous. The natural English form may be revisited in a future version with a more robust parser.
+
+---
+
+### BUG-005 · Negative numbers not supported
+
+- **Date:** 2026-05-13
+- **Status:** Fixed
+- **Symptom:** Writing `let temp be -10` caused a parse error. Negative numbers were not recognised by the lexer.
+- **Cause:** The number reader in the lexer only triggered when it saw a digit `0-9`. A minus sign was always treated as a subtraction operator, never as part of a number.
+- **Fix:** Extended the number reading condition in `tokenize()`. The lexer now checks whether a `-` is followed by a digit AND whether the previous token was `BE`, `PLUS`, `MINUS`, `COLON`, `COMMA`, or `INDENT`. If so, it reads the minus sign as part of the number.
+- **Code changed:** Number reading block in `tokenize()` in `App.js`
+  ```js
+  // Before
+  if (/\d/.test(line[i])) {
+
+  // After
+  const prevToken = tokens[tokens.length - 1];
+  const afterAssignOrOp = !prevToken || [
+      TT.BE, TT.PLUS, TT.MINUS, TT.COLON, TT.COMMA, TT.INDENT
+  ].includes(prevToken.type);
+
+  if (/\d/.test(line[i]) || (line[i] === "-" && /\d/.test(line[i + 1]) && afterAssignOrOp)) {
+  ```
+- **Now works:**
+  ```
+  let temp be -10
+  let balance be -500.50
+  let offset be 100 + -20
+  ```
+
+---
+
 ### BUG-004 · Math function tokens missing from times lookahead
 
 - **Date:** 2026-05-11
